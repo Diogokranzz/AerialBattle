@@ -26,7 +26,7 @@ export function Enemy({ count = 3 }: EnemyProps) {
       const radius = 50 + Math.random() * 30;
       const x = Math.sin(angle) * radius;
       const z = Math.cos(angle) * radius;
-      const y = 5 + Math.random() * 15;
+      const y = 20 + Math.random() * 15; // Increased starting height to match player
       
       // Randomly choose an enemy type with weighted preference
       const rand = Math.random();

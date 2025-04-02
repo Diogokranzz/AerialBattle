@@ -174,34 +174,21 @@ export function WeatherEffects() {
   
   return (
     <>
-      {/* Cloud instances */}
-      <instancedMesh
-        ref={cloudRef}
-        args={[undefined, undefined, cloudCount]}
-        frustumCulled={false}
-      >
-        <sphereGeometry args={[5, 8, 8]} />
-        <meshStandardMaterial 
-          color="white" 
-          transparent={true} 
-          opacity={0.5}
-          depthWrite={false}
-        />
-      </instancedMesh>
-      
-      {/* Rain instances */}
-      <instancedMesh
-        ref={rainRef}
-        args={[undefined, undefined, rainCount]}
-        frustumCulled={false}
-      >
-        <boxGeometry args={[1, 1, 1]} />
-        <meshBasicMaterial 
-          color="#85c9e6" 
-          transparent={true} 
-          opacity={0.6}
-        />
-      </instancedMesh>
+      {/* Rain instances - only visible during rainy weather */}
+      {weather === WeatherType.Rainy && (
+        <instancedMesh
+          ref={rainRef}
+          args={[undefined, undefined, rainCount]}
+          frustumCulled={false}
+        >
+          <boxGeometry args={[1, 1, 1]} />
+          <meshBasicMaterial 
+            color="#85c9e6" 
+            transparent={true} 
+            opacity={0.6}
+          />
+        </instancedMesh>
+      )}
     </>
   );
 }

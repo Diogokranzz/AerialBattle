@@ -94,7 +94,7 @@ export const useAirplaneStore = create<AirplaneStore>((set, get) => ({
         type,
         health: specs.health,
         maxHealth: specs.health,
-        position: { x: 0, y: 5, z: 0 },
+        position: { x: 0, y: 20, z: 0 }, // Increased starting height to 20
         rotation: { x: 0, y: 0, z: 0 },
         velocity: { x: 0, y: 0, z: 0 },
         speed: 0,
@@ -163,12 +163,12 @@ export const useAirplaneStore = create<AirplaneStore>((set, get) => ({
     };
     
     // Enforce height limits
-    if (newPosition.y < 3) {
-      newPosition.y = 3;
+    if (newPosition.y < 5) {
+      newPosition.y = 5;
       newVelocity.y = 0;
     }
-    if (newPosition.y > 30) {
-      newPosition.y = 30;
+    if (newPosition.y > 50) {
+      newPosition.y = 50;
       newVelocity.y = 0;
     }
     
@@ -287,7 +287,7 @@ export const useAirplaneStore = create<AirplaneStore>((set, get) => ({
       position.y += Math.sign(heightDiff) * Math.min(Math.abs(heightDiff), 0.05);
       
       // Ensure minimum height
-      if (position.y < 3) position.y = 3;
+      if (position.y < 5) position.y = 5;
       
       // Fire at player if in range and facing them
       const now = Date.now();
