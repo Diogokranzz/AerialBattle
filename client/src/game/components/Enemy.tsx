@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { Group, Mesh } from 'three';
+import { Group, Mesh, Object3DEventMap } from 'three';
 import { useAirplaneStore } from '../stores/useAirplaneStore';
 import { AirplaneType } from '../types';
 
@@ -10,7 +10,7 @@ interface EnemyProps {
 
 export function Enemy({ count = 3 }: EnemyProps) {
   const enemyRefs = useRef<Map<string, Group>>(new Map());
-  const propellerRefs = useRef<Map<string, Mesh>>(new Map());
+  const propellerRefs = useRef<Map<string, Group>>(new Map());
   
   const { player, enemies, createEnemy, updateEnemies } = useAirplaneStore();
   
@@ -152,7 +152,7 @@ export function Enemy({ count = 3 }: EnemyProps) {
           {/* Propeller blades */}
           <group 
             position={[0, 0, -1.6]} 
-            ref={ref => {
+            ref={(ref: Group) => {
               if (ref) propellerRefs.current.set(enemy.id, ref);
             }}
           >

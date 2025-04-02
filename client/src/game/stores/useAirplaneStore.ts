@@ -15,9 +15,9 @@ import { useAudio } from '../../lib/stores/useAudio';
 const airplaneSpecs: Record<AirplaneType, AirplaneSpecs> = {
   [AirplaneType.Fighter]: {
     type: AirplaneType.Fighter,
-    maxSpeed: 0.5,
-    acceleration: 0.02,
-    handling: 0.04,
+    maxSpeed: 1.0, // Dobrou a velocidade
+    acceleration: 0.04, // Dobrou a aceleração
+    handling: 0.05, // Aumentou levemente a manobrabilidade
     health: 100,
     firePower: 10,
     fireRate: 150, // milliseconds
@@ -25,9 +25,9 @@ const airplaneSpecs: Record<AirplaneType, AirplaneSpecs> = {
   },
   [AirplaneType.Bomber]: {
     type: AirplaneType.Bomber,
-    maxSpeed: 0.35,
-    acceleration: 0.015,
-    handling: 0.025,
+    maxSpeed: 0.7, // Dobrou a velocidade
+    acceleration: 0.03, // Dobrou a aceleração
+    handling: 0.03, // Aumentou levemente a manobrabilidade
     health: 150,
     firePower: 15,
     fireRate: 300, // milliseconds
@@ -35,9 +35,9 @@ const airplaneSpecs: Record<AirplaneType, AirplaneSpecs> = {
   },
   [AirplaneType.Scout]: {
     type: AirplaneType.Scout,
-    maxSpeed: 0.6,
-    acceleration: 0.025,
-    handling: 0.05,
+    maxSpeed: 1.2, // Dobrou a velocidade
+    acceleration: 0.05, // Dobrou a aceleração
+    handling: 0.06, // Aumentou levemente a manobrabilidade
     health: 80,
     firePower: 8,
     fireRate: 100, // milliseconds
@@ -332,7 +332,7 @@ export const useAirplaneStore = create<AirplaneStore>((set, get) => ({
     const spawnZ = position.z + directionZ * offsetDist;
     
     // Set projectile properties based on type
-    const speed = type === 'missile' ? 0.7 : 1.2;
+    const speed = type === 'missile' ? 1.4 : 2.4; // Dobrou a velocidade dos projéteis
     const damage = type === 'missile' ? 30 : 10;
     const ttl = type === 'missile' ? 5 : 2;
     
