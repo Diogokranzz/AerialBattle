@@ -72,40 +72,30 @@ export function Environment() {
       
       {/* Distant mountains and landmarks for orientation */}
       <group position={[0, -5, 0]}>
-        {/* Mountain ranges - mais polígonos e variações para parecer mais natural */}
-        <mesh position={[100, 10, -200]} rotation={[0, 0.5, 0]}>
-          <coneGeometry args={[80, 120, 8]} />
+        {/* Mountain ranges - reduzido para melhor performance mas mantendo visual */}
+        <mesh position={[100, 10, -300]} rotation={[0, 0.5, 0]}>
+          <coneGeometry args={[80, 120, 4]} />
           <meshStandardMaterial color="#596673" roughness={0.9} />
         </mesh>
         
-        <mesh position={[-150, 10, -200]} rotation={[0, 0.3, 0]}>
-          <coneGeometry args={[60, 90, 8]} />
+        <mesh position={[-250, 10, -300]} rotation={[0, 0.3, 0]}>
+          <coneGeometry args={[70, 100, 4]} />
           <meshStandardMaterial color="#667788" roughness={0.9} />
         </mesh>
         
-        <mesh position={[200, 10, -100]} rotation={[0, 0.7, 0]}>
-          <coneGeometry args={[50, 70, 8]} />
-          <meshStandardMaterial color="#556677" roughness={0.9} />
-        </mesh>
-        
-        <mesh position={[-250, 10, -150]} rotation={[0, 0.2, 0]}>
-          <coneGeometry args={[70, 100, 8]} />
-          <meshStandardMaterial color="#4a5a6a" roughness={0.9} />
-        </mesh>
-        
         <mesh position={[300, 10, -280]} rotation={[0, 0.5, 0]}>
-          <coneGeometry args={[90, 130, 8]} />
+          <coneGeometry args={[90, 130, 4]} />
           <meshStandardMaterial color="#506070" roughness={0.9} />
         </mesh>
         
-        {/* Distant city - edifícios mais realistas */}
-        <group position={[-200, 0, -150]}>
-          {Array.from({ length: 30 }).map((_, i) => {
-            const height = 8 + Math.random() * 30;
+        {/* Cidade distante mais baixa e menos obstrutiva */}
+        <group position={[-600, 0, -400]}>
+          {Array.from({ length: 15 }).map((_, i) => { // Menos prédios
+            const height = 8 + Math.random() * 15; // Altura menor
             const width = 5 + Math.random() * 3;
             const depth = 5 + Math.random() * 3;
-            const x = Math.random() * 100 - 50;
-            const z = Math.random() * 100 - 50;
+            const x = Math.random() * 150 - 75;
+            const z = Math.random() * 150 - 75;
             
             // Cores de edifícios mais variadas
             const buildingColors = ['#445566', '#3a4a5a', '#506475', '#657585', '#4d5d6d'];
@@ -118,18 +108,12 @@ export function Environment() {
                   <meshStandardMaterial color={color} roughness={0.8} />
                 </mesh>
                 
-                {/* Janelas para os edifícios */}
-                {Math.random() > 0.3 && (
-                  <>
-                    <mesh position={[0, 0, depth/2 + 0.01]}>
-                      <planeGeometry args={[width * 0.8, height * 0.8]} />
-                      <meshStandardMaterial color="#bbcce0" roughness={0.5} metalness={0.5} emissive="#bbcce0" emissiveIntensity={0.2} />
-                    </mesh>
-                    <mesh position={[0, 0, -depth/2 - 0.01]}>
-                      <planeGeometry args={[width * 0.8, height * 0.8]} />
-                      <meshStandardMaterial color="#bbcce0" roughness={0.5} metalness={0.5} emissive="#bbcce0" emissiveIntensity={0.2} />
-                    </mesh>
-                  </>
+                {/* Janelas simplificadas para melhor performance */}
+                {Math.random() > 0.5 && (
+                  <mesh position={[0, 0, depth/2 + 0.01]}>
+                    <planeGeometry args={[width * 0.8, height * 0.8]} />
+                    <meshBasicMaterial color="#bbcce0" />
+                  </mesh>
                 )}
               </group>
             );

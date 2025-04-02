@@ -37,8 +37,8 @@ export function Terrain() {
         />
       </mesh>
       
-      {/* Create some random terrain features */}
-      {Array.from({ length: 50 }).map((_, i) => { // Aumentei o número de características do terreno
+      {/* Create some random terrain features - reduzido para melhor performance */}
+      {Array.from({ length: 30 }).map((_, i) => { // Reduzido para melhorar desempenho
         const posX = (Math.random() - 0.5) * 800; // Área maior
         const posZ = (Math.random() - 0.5) * 800; // Área maior
         const scale = 5 + Math.random() * 15;
@@ -51,8 +51,8 @@ export function Terrain() {
               <sphereGeometry args={[scale, 16, 16, 0, Math.PI * 2, 0, Math.PI / 2]} />
             </mesh>
             
-            {/* Trees on hills */}
-            {Array.from({ length: Math.floor(4 + Math.random() * 6) }).map((_, j) => { // Mais árvores
+            {/* Trees on hills - número reduzido para melhor performance */}
+            {Array.from({ length: Math.floor(2 + Math.random() * 3) }).map((_, j) => { // Menos árvores para melhorar desempenho
               const treeX = (Math.random() - 0.5) * scale * 1.5;
               const treeZ = (Math.random() - 0.5) * scale * 1.5;
               const treeHeight = 3 + Math.random() * 4; // Árvores mais altas
@@ -74,28 +74,24 @@ export function Terrain() {
                     <cylinderGeometry args={[0.2, 0.3, treeHeight, 6]} />
                   </mesh>
                   
-                  {/* Tree foliage */}
+                  {/* Tree foliage - simplificado para melhor performance */}
                   {treeType === 'pine' ? (
-                    // Pinheiro (múltiplas camadas)
+                    // Pinheiro (apenas 2 camadas para melhor performance)
                     <>
                       <mesh castShadow position={[0, treeHeight * 0.6, 0]}>
                         <meshStandardMaterial color={treeColor} roughness={0.8} />
-                        <coneGeometry args={[2.2, treeHeight * 0.6, 8]} />
-                      </mesh>
-                      <mesh castShadow position={[0, treeHeight * 0.8, 0]}>
-                        <meshStandardMaterial color={treeColor} roughness={0.8} />
-                        <coneGeometry args={[1.7, treeHeight * 0.5, 8]} />
+                        <coneGeometry args={[2.0, treeHeight * 0.8, 6]} />
                       </mesh>
                       <mesh castShadow position={[0, treeHeight, 0]}>
                         <meshStandardMaterial color={treeColor} roughness={0.8} />
-                        <coneGeometry args={[1.2, treeHeight * 0.4, 8]} />
+                        <coneGeometry args={[1.2, treeHeight * 0.5, 6]} />
                       </mesh>
                     </>
                   ) : (
-                    // Árvore regular
+                    // Árvore regular (menos segmentos para melhor performance)
                     <mesh castShadow position={[0, treeHeight, 0]}>
                       <meshStandardMaterial color={treeColor} roughness={0.8} />
-                      <sphereGeometry args={[1.8, 8, 8]} />
+                      <sphereGeometry args={[1.8, 6, 6]} />
                     </mesh>
                   )}
                 </group>

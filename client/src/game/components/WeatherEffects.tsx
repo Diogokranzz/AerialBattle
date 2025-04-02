@@ -72,12 +72,15 @@ export function WeatherEffects() {
     }
   });
   
-  // Set fog based on weather
+  // Set fog based on weather - ajustado para melhor visibilidade em altitudes mais altas
   useEffect(() => {
+    // Usando o fog regular ao invés do FogExp2 para ter mais controle sobre o alcance
     if (weather === WeatherType.Foggy) {
-      scene.fog = new FogExp2('#cfcfcf', 0.02);
+      scene.fog = new THREE.Fog('#d5dbe0', 50, 500); // Começa a 50 unidades e termina a 500
     } else if (weather === WeatherType.Rainy) {
-      scene.fog = new FogExp2('#8c9cb0', 0.01);
+      scene.fog = new THREE.Fog('#a5b3c2', 100, 600); // Começa a 100 unidades e termina a 600
+    } else if (weather === WeatherType.Cloudy) {
+      scene.fog = new THREE.Fog('#e0e5eb', 200, 800); // Névoa muito leve para dia nublado
     } else {
       scene.fog = null;
     }
